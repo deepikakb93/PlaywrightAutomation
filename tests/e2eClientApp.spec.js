@@ -23,7 +23,7 @@ test('Order Placement Scenario', async ({browser}) => {
     console.log(producttiles);
     const count = await products.count()
     console.log("count:"+count);
-    //await page.pause();
+   
     for(let i=0;i<count;i++){
         if(await products.nth(i).locator("b").textContent() === productname){
             //add product to cart
@@ -66,9 +66,10 @@ test('Order Placement Scenario', async ({browser}) => {
     await dropdown.waitFor();
     const dropdowncount=await dropdown.locator("button").count();
     console.log("dropdown count:"+dropdowncount)
+     await page.pause();
 
     for(let j=0;j<dropdowncount;j++){
-        const text=await dropdown.nth(j).textContent();
+        const text=await dropdown.locator("button").nth(j).textContent();
         if (text === " India") {
             await dropdown.locator("button").nth(j).click();
             break;
